@@ -1,0 +1,21 @@
+<header class="navbar">
+  <div class="container">
+    <nav>
+      <ul>
+      <%= form_tag(search_page_path, :method => "get") do %>  
+      <div class="input-group">  
+        <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %>  
+        
+      </div>  
+<% end %>
+      <% if logged_in? %>
+        <li><%= current_user.name %></li>    
+        <li><%= link_to "LOGOUT", logout_path, method: "delete" %></li>
+      <% else %>
+        <li><%= link_to "SIGNUP",   '/users/new' %></li>
+        <li><%= link_to "LOGIN",   '/sessions/new' %></li>
+     <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

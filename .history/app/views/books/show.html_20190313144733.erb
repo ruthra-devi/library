@@ -1,0 +1,12 @@
+<h1>Book</h1>
+<p class ="book_name"><%= @book.bname %></p>
+<p class="book_desc"><%= @book.desc %></p>
+<% if @book.qty == 0 %>
+    <p class="button">No Stock</p>
+<% else %>
+    <% if contributor? %>
+        <h4>Book contributed by You </h4>
+    <%else%>
+        <p class="button"><%= link_to "Borrow Book",{:action => 'borrow' , :id => @book.id} %></p>
+    <% end %>
+<% end %>    

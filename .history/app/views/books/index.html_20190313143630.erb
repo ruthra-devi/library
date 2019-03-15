@@ -1,0 +1,21 @@
+
+<h1>Book details</h1>
+<%= will_paginate @books %>
+<div class ="book_details">
+
+  <% @books.each do |c| %>
+    <% if contributor? c %>
+
+      <%= link_to(:action => 'show' , :id => c.id) do %> 
+        <div class="book_item">
+          <h4 class="book_title"><%= c.bname %></h4>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+</div>
+<%= will_paginate @books %>
+<p class="button"><%= link_to "Add new Book", {:action => 'new' }%></p>
+

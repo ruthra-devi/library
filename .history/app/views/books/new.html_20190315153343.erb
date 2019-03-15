@@ -1,0 +1,25 @@
+<% provide(:title, 'Add book') %>
+<h1>Adding book </h1>
+<div class = "form">
+    <%= form_for(@book) do |f| %>
+      <table>
+        <tr>
+        <td><%= f.label :bname %></td>
+        <td><%= f.text_field :bname %>
+          <% if @user.errors[:bname].any? %>
+            <div class="errors"><%= @user.errors[:bname] %></div>
+          <% end %>
+        </td>
+        </tr>
+        <tr>
+        <td><%= f.label :desc %></td>
+        <td><%= f.text_field :desc %>
+          <% if @user.errors[:desc].any? %>
+            <div class="errors"><%= @user.errors[:desc] %></div>
+          <% end %>
+        </td>
+        </tr>
+      </table>
+      <%= f.submit "Add", class:'button-form' %>
+    <% end %>
+</div>

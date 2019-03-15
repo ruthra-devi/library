@@ -1,0 +1,46 @@
+class BooksController < ApplicationController
+    def new
+      if !logged_in?
+        redirect_to :controller => 'users', :action =>'new'
+      end
+        @book = Book.new
+        
+    end
+    def create
+      if Book.exists?(:bname =>  params[:book][:bname])
+        @book = Book.find_by_bname(params[:book][:bname])
+        @book.qty+=1
+        @book.save
+        @booksContribute = @book.books_contribute.create()
+        @booksContribute.bname = @book.bname
+        @booksContribute.contributors = current_user.id
+        @booksContribute.save
+        redirect_to @book
+      else
+        @book = Book.new(book_params)
+        @book.qty = 1
+        if @book.save
+          flash[:success] = "Successfully added a book"
+          @booksContribute = @book.books_contribute.create()
+          @booksContribute.bname = @book.bname
+          @booksContribute.contributors = current_user.id
+          @booksContribute.save
+          redirect_to @book
+        else
+          render 'new'
+        end
+        
+      end
+    end
+    def index
+      @books = Book.all
+    end
+    def show
+      @book = Book.find(params[:id])
+    end
+    
+    private 
+    def book_params
+      params.require(:book).permit(:bname, :desc)
+    end
+end

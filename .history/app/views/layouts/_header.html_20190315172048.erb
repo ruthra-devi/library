@@ -1,0 +1,23 @@
+<header class="navbar">
+  <div class="container">
+    <nav>
+      <ul>
+      <li><%= link_to "Books",  '/books' %></li>
+      <li><%= link_to "Contribute",  '/books/new' %></li>
+      
+      <li><%= form_tag(search_page_path, :method => "get") do %>  
+       <%= search_field_tag :search, params[:search], placeholder: "Search", class: "form-control" %> 
+       <div id ="autocomplete_search_results"> 
+        <% end %>
+      </li>
+      <% if logged_in? %>
+        <li><%= link_to books_contributed_path, '/books/contributed'%></li>
+       <li class="login"><%= link_to "LOGOUT", logout_path, method: "delete" %></li>
+      <% else %>
+        <li class="login"><%= link_to "SIGNUP",   '/users/new' %></li>
+        <li class="login"><%= link_to "LOGIN",   '/sessions/new' %></li>
+     <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>
