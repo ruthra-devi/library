@@ -1,7 +1,0 @@
-
-<h1>Book details</h1>
-<div class ="book_details">
-<%= will_paginate @books %>
-  <% Book.find_each do |c| %>
-    <h1><%= c.bname %>
-  <% end %>
